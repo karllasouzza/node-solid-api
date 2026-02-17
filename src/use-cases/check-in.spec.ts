@@ -7,7 +7,7 @@ import { CheckInUseCase } from "./check-in.js";
 import { MaxDistanceError } from "./errors/max-distance-error.js";
 import { MaxNumberOfCheckInsError } from "./errors/max-number-of-chek-ins-error.js";
 
-describe("use-cases/check-in", () => {
+describe("Check Ins Use Case", () => {
   let checkInRepository: InMemoryCheckInsRepository;
   let gymsRepository: InMemoryGymsRepository;
   let sut: CheckInUseCase;

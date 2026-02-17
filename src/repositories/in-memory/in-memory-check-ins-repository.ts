@@ -9,21 +9,31 @@ export class InMemoryCheckInsRepository implements CheckInsRepository {
     const startOfTheDay = dayjs(date).startOf("day");
     const endOfTheDay = dayjs(date).endOf("day");
 
+    const checkInOnSameDate = this.checkIns.find((checkIn) => {
+      const checkInDate = dayjs(checkIn.createdAt);
+      const isOnSameDay =
+        checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay);
 
-    const checkInOnSameDate = this.checkIns.find(
-      (checkIn) => {
-        const checkInDate = dayjs(checkIn.createdAt);
-        const isOnSameDay = checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay);
-        
-        return checkIn.user_id === userId && isOnSameDay;
-      }    
-    );
+      return checkIn.user_id === userId && isOnSameDay;
+    });
 
     if (!checkInOnSameDate) {
       return null;
     }
 
     return checkInOnSameDate;
+  }
+
+  async findManyByUserId(userId: string, page: number) {
+    const checkIns = this.checkIns.filter(
+      (checkIn) => checkIn.user_id === userId,
+    );
+
+    return checkIns.slice((page - 1) * 20, page * 20);
+  }
+
+  async countByUserId(userId: string) {
+    return this.checkIns.filter((checkIn) => checkIn.user_id === userId).length;
   }
 
   async create(data: Prisma.CheckInUncheckedCreateInput) {
