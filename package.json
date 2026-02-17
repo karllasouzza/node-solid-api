@@ -5,12 +5,20 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
-    "build": "tsup src/server.ts --format esm,cjs --dts --out-dir build"
+    "build": "tsup src/server.ts --format esm,cjs --dts --out-dir build",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/node": "25.2.3",
     "@types/pg": "^8",
+    "@vitest/coverage-v8": "4.0.18",
+    "@vitest/ui": "4.0.18",
     "eslint": "10.0.0",
     "eslint-config-prettier": "10.1.8",
     "globals": "17.3.0",
@@ -19,13 +27,16 @@
     "tsup": "8.5.1",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.56.0"
+    "typescript-eslint": "8.56.0",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.0.18"
   },
   "dependencies": {
     "@prisma/adapter-pg": "7.4.0",
     "@prisma/adapter-ppg": "7.4.0",
     "@prisma/client": "7.4.0",
     "bcryptjs": "3.0.3",
+    "dayjs": "1.11.19",
     "dotenv": "17.3.1",
     "fastify": "5.7.4",
     "jiti": "2.6.1",
