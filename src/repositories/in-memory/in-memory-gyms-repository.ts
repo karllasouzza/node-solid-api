@@ -14,6 +14,14 @@ export class InMemoryGymsRepository implements GymsRepository {
 
     return gym;
   }
+  async searchMany(query: string, page: number) {
+    const gyms = this.gyms.filter((gym) => gym.title.toLowerCase().includes(query.toLowerCase()));
+
+    const startIndex = (page - 1) * 20;
+    const endIndex = startIndex + 20;
+
+    return gyms.slice(startIndex, endIndex);
+  }
 
   async create(data: Prisma.GymCreateInput) {
     const gym = {

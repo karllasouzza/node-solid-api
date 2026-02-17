@@ -1,27 +1,15 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins-repository.js";
-import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository.js";
 
 import { FetchUserCheckInsHistoryUseCase } from "./fetch-member-check-ins-history.js";
 
 describe("Fetch User Check-Ins History Use Case", () => {
   let checkInRepository: InMemoryCheckInsRepository;
-  let gymsRepository: InMemoryGymsRepository;
   let sut: FetchUserCheckInsHistoryUseCase;
 
   beforeEach(async () => {
     checkInRepository = new InMemoryCheckInsRepository();
-    gymsRepository = new InMemoryGymsRepository();
     sut = new FetchUserCheckInsHistoryUseCase(checkInRepository);
-
-    // await gymsRepository.create({
-    //   id: "gym-123",
-    //   title: "Distant Gym",
-    //   description: "",
-    //   phone: "",
-    //   latitude: new Decimal(userLatitude),
-    //   longitude: new Decimal(userLongitude),
-    // });
 
     vi.useFakeTimers();
   });
