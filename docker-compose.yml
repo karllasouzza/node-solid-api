@@ -5,8 +5,8 @@ services:
     image: bitnami/postgresql:latest
     build: .
     ports:
-      - "5232:5232"
+      - 5433:5432
     environment:
-      - POSTGRES_USER=docker
+      - POSTGRES_USERNAME=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=apisolid
+      - POSTGRES_DATABASE=apisolid
