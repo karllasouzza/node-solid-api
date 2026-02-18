@@ -1,8 +1,8 @@
 import type { Gym, Prisma } from "generated/prisma/client.js";
 
 export interface FindManyNearByParams {
-  userLatitude: number;
-  userLongitude: number;
+  latitude: number;
+  longitude: number;
 }
 
 export interface GymsRepository {

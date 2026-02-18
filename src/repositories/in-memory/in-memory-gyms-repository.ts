@@ -31,8 +31,8 @@ export class InMemoryGymsRepository implements GymsRepository {
           longitude: gym.longitude.toNumber(),
         },
         {
-          latitude: new Decimal(params.userLatitude).toNumber(),
-          longitude: new Decimal(params.userLongitude).toNumber(),
+          latitude: new Decimal(params.latitude).toNumber(),
+          longitude: new Decimal(params.longitude).toNumber(),
         },
       );
       return distance < 10;
