@@ -5,6 +5,8 @@ import { MaxDistanceError } from "./errors/max-distance-error.js";
 import { MaxNumberOfCheckInsError } from "./errors/max-number-of-chek-ins-error.js";
 import { ResourceNotFoundError } from "./errors/resource-not-found.js";
 import { check } from "zod";
+import dayjs from "dayjs";
+import { LateCheckInValidationError } from "./errors/late-check-in-validation-error.js";
 
 interface ValidateCheckInUseCaseRequest {
   checkInId: string;
@@ -24,6 +26,12 @@ export class ValidateCheckInUseCase {
 
     if (!checkIn) {
       throw new ResourceNotFoundError();
+    }
+
+    const distanceInMinutesFromCheckInCreation = dayjs(new Date()).diff(checkIn.createdAt, "minutes");
+
+    if(distanceInMinutesFromCheckInCreation > 20) {
+      throw new LateCheckInValidationError();
     }
 
     checkIn.validated_at = new Date();
