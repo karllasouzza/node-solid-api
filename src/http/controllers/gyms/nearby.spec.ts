@@ -14,7 +14,7 @@ describe("Nearby Gyms Controller (E2E)", () => {
   });
 
   it("should be able to fetch nearby gyms", async () => {
-    const { token } = await createAndAuthenticateUser(app);
+    const { token } = await createAndAuthenticateUser(app, true);
     const uniqueKey = randomUUID();
 
     await request(app.server)
