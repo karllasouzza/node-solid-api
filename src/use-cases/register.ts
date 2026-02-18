@@ -1,5 +1,3 @@
-import { prisma } from "@/lib/prisma.js";
-import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository.js";
 import type { UsersRepository } from "@/repositories/users-repository.js";
 import { hash } from "bcryptjs";
 import { UserAlreadyExistsError } from "./errors/user-already-exists-error.js";
