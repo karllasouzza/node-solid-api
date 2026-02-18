@@ -18,6 +18,7 @@ jobs:
         node-version: 24
         cache: yarn
     - run: yarn install --immutable
+    - run: yarn prisma generate
     - run: yarn test
       env:
         JWT_SECRET: ci-test-secret

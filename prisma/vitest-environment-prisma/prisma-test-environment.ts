@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { execSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import pg from "pg";
 
 import type { Environment } from "vitest/environments";
 
