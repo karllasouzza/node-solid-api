@@ -4,6 +4,7 @@ import type { GymsRepository } from "@/repositories/gyms-repository.js";
 import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates.js";
 import { MaxDistanceError } from "./errors/max-distance-error.js";
 import { MaxNumberOfCheckInsError } from "./errors/max-number-of-chek-ins-error.js";
+import { ResourceNotFoundError } from "./errors/resource-not-found.js";
 
 interface CheckInUseCaseRequest {
   userId: string;
@@ -13,7 +14,7 @@ interface CheckInUseCaseRequest {
 }
 
 interface CheckInUseCaseResponse {
-  checkin: CheckIn;
+  checkIn: CheckIn;
 }
 
 export class CheckInUseCase {
@@ -57,15 +58,15 @@ export class CheckInUseCase {
       throw new MaxNumberOfCheckInsError();
     }
 
-    const checkin = await this.checkInsRepository.create({
+    const checkIn = await this.checkInsRepository.create({
       user_id: userId,
       gym_id: gymId,
     });
 
-    if (!checkin) {
-      throw new Error("Failed to create check-in");
+    if (!checkIn) {
+      throw new ResourceNotFoundError();
     }
 
-    return { checkin };
+    return { checkIn };
   }
 }

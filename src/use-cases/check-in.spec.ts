@@ -37,14 +37,14 @@ describe("Check Ins Use Case", () => {
   });
 
   it("should be able to check in a user", async () => {
-    const { checkin } = await sut.execute({
+    const { checkIn } = await sut.execute({
       userId: "user-123",
       gymId: "gym-123",
       userLatitude: userLatitude,
       userLongitude: userLongitude,
     });
 
-    expect(checkin.id).toEqual(expect.any(String));
+    expect(checkIn.id).toEqual(expect.any(String));
   });
 
   it("should not allow a user to check in twice on the same day", async () => {
@@ -79,14 +79,14 @@ describe("Check Ins Use Case", () => {
 
     vi.setSystemTime(new Date(2026, 0, 21, 8, 0, 0)); // January 21, 2024, 08:00:00
 
-    const { checkin } = await sut.execute({
+    const { checkIn } = await sut.execute({
       userId: "user-123",
       gymId: "gym-123",
       userLatitude: userLatitude,
       userLongitude: userLongitude,
     });
 
-    expect(checkin.id).toEqual(expect.any(String));
+    expect(checkIn.id).toEqual(expect.any(String));
   });
 
   it("should not be able to check in on distant gym", async () => {
