@@ -1,0 +1,35 @@
+name: Run E2E Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://docker:docker@localhost:5433/apisolid?schema=public
+      JWT_SECRET: ci-test-secret
+
+    services:
+      api-solid-pg:
+        image: bitnami/postgresql:latest
+        ports:
+          - 5433:5432
+        env:
+          POSTGRES_USERNAME: docker
+          POSTGRES_PASSWORD: docker
+          POSTGRES_DATABASE: apisolid
+
+    steps:
+      - uses: actions/checkout@v6
+      - run: corepack enable
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: yarn
+      - run: yarn install --immutable
+      - run: yarn prisma generate
+      - run: yarn test:e2e

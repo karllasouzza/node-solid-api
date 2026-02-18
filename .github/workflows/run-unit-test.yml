@@ -10,7 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: postgresql://docker:docker@localhost:5433/apisolid?schema=public
       JWT_SECRET: ci-test-secret
 
     steps:
@@ -21,5 +20,4 @@ jobs:
         node-version: 24
         cache: yarn
     - run: yarn install --immutable
-    - run: yarn prisma generate
     - run: yarn test
