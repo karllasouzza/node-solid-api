@@ -10,14 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: postgresql://docker:docker@localhost:5433/apisolid?schema=public
+      DATABASE_URL: postgresql://docker:docker@localhost:5432/apisolid?schema=public
       JWT_SECRET: ci-test-secret
 
     services:
       api-solid-pg:
         image: bitnami/postgresql:latest
         ports:
-          - 5433:5432
+          - 5432:5432
         env:
           POSTGRES_USERNAME: docker
           POSTGRES_PASSWORD: docker
