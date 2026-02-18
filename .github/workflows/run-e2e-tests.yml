@@ -19,9 +19,14 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USERNAME: docker
-          POSTGRES_PASSWORD: docker
-          POSTGRES_DATABASE: apisolid
+          POSTGRESQL_USERNAME: docker
+          POSTGRESQL_PASSWORD: docker
+          POSTGRESQL_DATABASE: apisolid
+        options: >-
+          --health-cmd "pg_isready -U docker -d apisolid"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - uses: actions/checkout@v6
@@ -31,5 +36,6 @@ jobs:
           node-version: 24
           cache: yarn
       - run: yarn install --immutable
+      - run: yarn prisma migrate deploy
       - run: yarn prisma generate
       - run: yarn test:e2e
